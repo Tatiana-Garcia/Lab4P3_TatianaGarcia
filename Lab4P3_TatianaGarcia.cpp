@@ -3,11 +3,11 @@
 #include <ctime>
 #include<cstring>
 using namespace std;
-int Factorial(int x) {
+int factorial(int x) {
 	if (x == 0)
 		return 1;
 	else
-		return x * Factorial(x - 1);
+		return x * factorial(x - 1);
 }
 int num_repeticiones(char c, string cadena) {
 	int cont = 0;
@@ -24,20 +24,25 @@ void Permutaciones_con_Repeticion() {
 	string cadena_temp = cadena;
 	int acumulador =1;
 	//string cadena_temp = " ";
+	//Validacion
 	do {
 		cout << "Ingrese palabra para calcular permutaciones: ";
 		cin >> cadena;
 	} while (cadena.size() < 6);
 	cadena_temp = cadena;
 	cout << "Letras que se repiten:" << endl;
+	//recorre cadena
 	for (int i = 0; i < cadena.size(); i++)
 	{
 		char caracter = cadena[i];
 		int num = num_repeticiones(caracter, cadena);
 		if (num>1)
 		{
-			acumulador *= Factorial(num); 
-			if (caracter!=' ') cout << caracter << ": " << num << " veces" << endl;
+			if (caracter != ' ') { 
+				acumulador = acumulador * (factorial(num));
+				cout << caracter << ": " << num << " veces" << endl; 
+			}
+			//For para no contar otra vez las letras ya ingresadas
 			for (int j = 0; j < cadena.size(); j++)
 			{
 				if (cadena[j]==caracter) cadena[j] = ' ';
@@ -46,12 +51,98 @@ void Permutaciones_con_Repeticion() {
 		}
 	}
 	
-	int factorial = Factorial(cadena_temp.size()) / acumulador; 
-	cout<<factorial<<" -> "
-	cout << "Número de permutaciones de la palabra " << cadena_temp << ": " << factorial;
+	int Factorial = factorial(cadena_temp.size()) / acumulador; 
+	cout << "Número de permutaciones de la palabra " << cadena_temp << ": " << Factorial;
 
 }
+string secuencia(string cadena) {
+	string secuencia =" ";
+	int max_A = 0, max_C = 0, max_G = 0, max_T = 0;
+	for (int i = 0; i < cadena.size(); i++)
+	{
+		for (int j = 0; j < cadena.size()-1; j++)
+		{
+			switch (cadena[i])
+			{
+			case 'A': {
+				break;
+			}
+			case 'C': {
+				break;
+			}
+			case 'G': {
+				break;
+			}
+			case 'T': {
+				break;
+			}
+			default:
+				break;
+			}
+		}
+	}
+	return secuencia; 
+}
 void ADN() {
+	string cadena = " ";
+	bool valid = false;
+	
+	//int acumulador = 1;
+	//string cadena_temp = " ";
+
+	///Validacion de A G C T
+	do {
+		cout << "Ingrese una cadena de ADN: ";
+		cin >> cadena;
+		for (int i = 0; i < cadena.size(); i++)
+		{
+			char c = cadena[i];
+			if (c != 'A' && c != 'C' && c != 'G' && c != 'T') {
+				valid = false;
+				break;
+			}
+			else {
+				valid = true;
+			}
+		}
+	} while (!valid);
+
+	int cont_A =0, cont_C =0, cont_G=0, cont_T=0;
+	int porcentaje;
+	cout << "Análisis de la cadena de ADN:\n- Número total de nucleótidos: \n- Número de ocurrencias de cada nucleótido:\n";
+	for (int i = 0; i < cadena.size(); i++)
+	{
+		switch (cadena[i])
+		{
+		case 'A': {
+			cont_A++;
+			break;
+		}
+		case 'C': {
+			cont_C++;
+			break;
+		}
+		case 'G': {
+			cont_G++;
+			break;
+		}
+		case 'T': {
+			cont_T++;
+			break;
+		}
+		default:
+			break;
+		}
+	}
+
+	double porcentaje_A = ((double)cont_A / cadena.size()) * 100;
+	double porcentaje_C = ((double)cont_C / cadena.size()) * 100; 
+	double porcentaje_G = ((double)cont_G / cadena.size()) * 100;
+	double porcentaje_T = ((double)cont_T / cadena.size()) * 100;
+	cout << "A: " << cont_A << endl << "C: " << cont_C << endl << "G: " << cont_G << endl << "T: " << cont_T << endl;
+	cout << "- Porcentaje de cada nucleótido: " << endl; 
+	cout << "A: " << porcentaje_A<<"%" << endl << "C: " << porcentaje_C<< "%" << endl << "G: " <<porcentaje_G<< "%" << endl << "T: " << porcentaje_T << "%" << endl;
+	cout << "Secuencia más larga de nucleótidos consecutivos que se repiten: "<<secuencia(cadena);
 
 }
 void Menu() {//Menu de Ejercicios
