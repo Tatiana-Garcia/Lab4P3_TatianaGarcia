@@ -1,20 +1,81 @@
-// Lab4P3_TatianaGarcia.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include<cstring>
+using namespace std;
+int Factorial(int x) {
+	if (x == 0)
+		return 1;
+	else
+		return x * Factorial(x - 1);
+}
+int num_repeticiones(char c, string cadena) {
+	int cont = 0;
+	for (int i = 0; i < cadena.size(); i++)
+	{
+		if (c == cadena[i]) { 
+			cont++; 
+		}
+	}
+	return cont;
+}
+void Permutaciones_con_Repeticion() {
+	string cadena = " ";
+	string cadena_temp = cadena;
+	int acumulador =1;
+	//string cadena_temp = " ";
+	do {
+		cout << "Ingrese palabra para calcular permutaciones: ";
+		cin >> cadena;
+	} while (cadena.size() < 6);
+	cadena_temp = cadena;
+	cout << "Letras que se repiten:" << endl;
+	for (int i = 0; i < cadena.size(); i++)
+	{
+		char caracter = cadena[i];
+		int num = num_repeticiones(caracter, cadena);
+		if (num>1)
+		{
+			acumulador *= Factorial(num); 
+			if (caracter!=' ') cout << caracter << ": " << num << " veces" << endl;
+			for (int j = 0; j < cadena.size(); j++)
+			{
+				if (cadena[j]==caracter) cadena[j] = ' ';
+				
+			}
+		}
+	}
+	
+	int factorial = Factorial(cadena_temp.size()) / acumulador; 
+	cout<<factorial<<" -> "
+	cout << "Número de permutaciones de la palabra " << cadena_temp << ": " << factorial;
 
+}
+void ADN() {
+
+}
+void Menu() {//Menu de Ejercicios
+	srand(time(NULL));
+	int opcion = 1;
+	setlocale(LC_ALL, "spanish");
+	do {
+		cout << "\n---- MENU ----" << endl;
+		cout << "0 --> Salida del Programa" << endl;
+		cout << "1 --> Permutaciones con Repetición" << endl;
+		cout << "2 --> Análisis de ADN" << endl;
+		cout << "Ingresar una opción del menu: "; cin >> opcion;
+		cout << endl;
+		if (opcion == 1)
+		{
+			Permutaciones_con_Repeticion(); 
+		}
+		if (opcion == 2)
+		{
+			ADN(); 
+		}
+	} while (opcion);
+}
 int main()
 {
-    std::cout << "Hello World!\n";
+	Menu();
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
