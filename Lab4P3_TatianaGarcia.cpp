@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <ctime>
 #include<cstring>
+#include <iomanip>
 using namespace std;
 int factorial(int x) {
 	if (x == 0)
@@ -210,7 +211,7 @@ void ADN() {
 	double porcentaje_T = ((double)cont_T / cadena.size()) * 100;
 	cout << "A: " << cont_A << endl << "C: " << cont_C << endl << "G: " << cont_G << endl << "T: " << cont_T << endl;
 	cout << "- Porcentaje de cada nucleótido: " << endl; 
-	cout << "A: " << porcentaje_A << "%" << endl << "C: " << porcentaje_C << "%" << endl << "G: " << porcentaje_G << "%" << endl << "T: " << porcentaje_T << "%" << endl;
+	cout<<fixed<<setprecision(2) << "A: " << porcentaje_A << "%" << endl << "C: " << porcentaje_C << "%" << endl << "G: " << porcentaje_G << "%" << endl << "T: " << porcentaje_T << "%" << endl;
 	cout << "- Secuencia más larga de nucleótidos consecutivos que se repiten: "<<secuencia(cadena);
 }
 void Menu() {//Menu de Ejercicios
