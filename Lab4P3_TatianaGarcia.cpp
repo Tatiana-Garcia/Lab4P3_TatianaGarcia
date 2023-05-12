@@ -56,29 +56,99 @@ void Permutaciones_con_Repeticion() {
 
 }
 string secuencia(string cadena) {
-	string secuencia =" ";
-	int max_A = 0, max_C = 0, max_G = 0, max_T = 0;
-	for (int i = 0; i < cadena.size(); i++)
+	string secuencia ="";
+	int max_A = 0, max_C = 0, max_G = 0, max_T = 0;//contadores de nucleotidos
+	int tot_A =0, tot_C = 0, tot_G = 0, tot_T = 0;//total de nucleotidos el cual tiene el maximo de nucleotidos en secuencia
+	for (int i = 0; i < cadena.size(); i++)//Analiza cual es el nucleotido con la mayor secuencia 
 	{
 		for (int j = 0; j < cadena.size()-1; j++)
 		{
 			switch (cadena[i])
 			{
 			case 'A': {
+				if (cadena[j]=='A')
+				{
+					max_A++;
+				}
+				else {
+					if (tot_A<max_A)
+					{
+						tot_A = max_A;
+					}
+					max_A = 0;
+				}
 				break;
 			}
 			case 'C': {
+				if (cadena[j] == 'C')
+				{
+					max_C++;
+				}
+				else {
+					if (tot_C < max_C)
+					{
+						tot_C = max_C;
+					}
+					max_C = 0;
+				}
 				break;
 			}
 			case 'G': {
+				if (cadena[j] == 'G')
+				{
+					max_G++;
+				}
+				else {
+					if (tot_G < max_G)
+					{
+						tot_G = max_G;
+					}
+					max_G = 0;
+				}
 				break;
 			}
 			case 'T': {
+				if (cadena[j] == 'T')
+				{
+					max_T++;
+				}
+				else {
+					if (tot_T < max_T)
+					{
+						tot_T = max_T;
+					}
+					max_T = 0;
+				}
 				break;
 			}
 			default:
 				break;
 			}
+		}
+	}
+	//Imprime el total del nucleotido mayor
+	if (tot_G >= tot_C && tot_G >= tot_T && tot_G >= tot_A)
+	{
+		for (int i = 0; i < tot_G; i++)
+		{
+			secuencia += 'G';
+		}
+	}else if (tot_C >= tot_A && tot_C >= tot_T && tot_C >= tot_G)
+	{
+		for (int i = 0; i < tot_C; i++)
+		{
+			secuencia += 'C';
+		}
+	}else if (tot_A >= tot_C && tot_A >= tot_T && tot_A >= tot_G)
+	{
+		for (int i = 0; i < tot_A; i++)
+		{
+			secuencia += 'A';
+		}
+	}else {
+		for (int i = 0; i < tot_T; i++)
+		{
+			secuencia += 'T';
 		}
 	}
 	return secuencia; 
@@ -134,16 +204,14 @@ void ADN() {
 			break;
 		}
 	}
-
 	double porcentaje_A = ((double)cont_A / cadena.size()) * 100;
 	double porcentaje_C = ((double)cont_C / cadena.size()) * 100; 
 	double porcentaje_G = ((double)cont_G / cadena.size()) * 100;
 	double porcentaje_T = ((double)cont_T / cadena.size()) * 100;
 	cout << "A: " << cont_A << endl << "C: " << cont_C << endl << "G: " << cont_G << endl << "T: " << cont_T << endl;
 	cout << "- Porcentaje de cada nucleótido: " << endl; 
-	cout << "A: " << porcentaje_A<<"%" << endl << "C: " << porcentaje_C<< "%" << endl << "G: " <<porcentaje_G<< "%" << endl << "T: " << porcentaje_T << "%" << endl;
-	cout << "Secuencia más larga de nucleótidos consecutivos que se repiten: "<<secuencia(cadena);
-
+	cout << "A: " << porcentaje_A << "%" << endl << "C: " << porcentaje_C << "%" << endl << "G: " << porcentaje_G << "%" << endl << "T: " << porcentaje_T << "%" << endl;
+	cout << "- Secuencia más larga de nucleótidos consecutivos que se repiten: "<<secuencia(cadena);
 }
 void Menu() {//Menu de Ejercicios
 	srand(time(NULL));
